@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="./assets/styles/style.css" />
     <script src="./assets/js/script.js" defer></script>
     <script src="./assets/js/date.js" defer></script>
+    <script src="./assets/js/data.js" defer></script>
     <title>CSS Grid</title>
   </head>
   <body>
@@ -84,10 +85,11 @@
                 </div>
               </fieldset>
               <button
-                type="submit"
+                type="button"
                 name="start"
                 id="start"
                 class="start__submit"
+                disabled
               >
                 Старт
               </button>
@@ -138,5 +140,29 @@
         </div>
       </footer>
     </div>
+    <dialog id="data_dialog" class="data_dialog" autofocus="">
+      <h3>Детальная информация</h3>
+      <p class="working-date"></p>
+      <form method="dialog" class="data_dialog__form">
+        <div class="form__group">
+          <label for="start-time">Время начала</label>
+          <input type="time" id="start-time" name="start-time" required />
+        </div>
+        <div class="form__group">
+          <label for="start-ml">Стартовый пробег</label>
+          <input type="number" id="start-ml" name="start-ml" required />
+        </div>
+        <div class="form__group">
+          <label for="end-time">Время окончания</label>
+          <input type="time" id="end-time" name="end-time" required />
+        </div>
+        <div class="form__group">
+          <label for="end-ml">Конечный пробег</label>
+          <input type="number" id="end-ml" name="end-ml" required />
+        </div>
+        <button id="confirm" value="confirm">Подтвердить</button>
+        <button id="cancel" value="cancel">Отмена</button>
+      </form>
+    </dialog>
   </body>
 </html>

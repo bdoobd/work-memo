@@ -54,20 +54,6 @@ body {
   padding: 0.5rem 1rem;
 }
 
-/* .header__content,
-main,
-.footer__content {
-  max-width: 82rem;
-  margin: 0 auto;
-} */
-
-/* .header__content,
-.content,
-aside,
-.footer__content {
-  padding: 1rem;
-} */
-
 ul {
   list-style: none;
 }
@@ -174,7 +160,29 @@ dd:before {
     border-radius: 4px;
   }
 }
+/*********************************************************/
+/* START dialog styles (mobile first) */
+/*********************************************************/
+.data_dialog {
+  border: none;
+  border-radius: 4px;
+  padding: 2rem;
+  max-width: 20rem;
+  margin: 0 auto;
+  margin-block-start: clamp(1rem, 25vw, 5rem);
+  background-color: var(--background);
+}
 
+.data_dialog::backdrop {
+  backdrop-filter: blur(2px);
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-block-end: 1rem;
+}
 /* Классы-утилиты */
 .warning {
   color: var(--warning);
