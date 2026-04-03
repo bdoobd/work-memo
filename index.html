@@ -4,113 +4,139 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
-    <script src="date.js" defer></script>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+    <script src="./assets/js/script.js" defer></script>
+    <script src="./assets/js/date.js" defer></script>
     <title>CSS Grid</title>
   </head>
   <body>
-    <header class="header">
-      <div class="header__content">
-        <h1 class="header__logo">Lorem ipsum dolor.</h1>
-        <nav class="nav">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <a class="nav__link" href="#">Main</a>
-            </li>
-            <li class="nav__item">
-              <a class="nav__link" href="#">Details</a>
-            </li>
-            <li class="nav__item">
-              <a class="nav__link" href="#">Filter</a>
-            </li>
-            <li class="nav__item">
-              <a class="nav__link" href="#">Search</a>
-            </li>
-            <li class="nav__item">
-              <a class="nav__link" href="#">Login</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="hamburger">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
+    <div class="wrapper">
+      <header class="header">
+        <div class="header__content">
+          <h1 class="header__logo">Lorem ipsum dolor.</h1>
+          <nav class="nav">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="#">Main</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="#">Details</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="#">Filter</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="#">Search</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="#">Login</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
         </div>
-      </div>
-    </header>
-    <main>
-      <div class="content">
-        <section>
-          <form action="#" class="start-day">
-            <fieldset>
-              <label for="start_date">Начало рабочего дня</label>
-              <div class="form__group">
-                <input type="date" name="start_date" id="start_date" />
-                <button type="button" class="get-today" name="today" id="today">
-                  Сегодня
-                </button>
-              </div>
-            </fieldset>
-            <button type="submit" name="start" id="start">Старт</button>
-          </form>
-        </section>
-        <section>
-          <h2>Lorem ipsum dolor sit amet.</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-            maiores laborum, aperiam consequuntur nobis hic eaque odit modi,
-            quasi eius mollitia repellendus tenetur ipsa quas. Porro accusamus
-            ea et deleniti tempora, mollitia vero placeat deserunt dolor enim
-            inventore dicta, nemo.
-          </p>
-        </section>
-        <section>
-          <h2>Lorem ipsum dolor sit amet.</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-            maiores laborum, aperiam consequuntur nobis hic eaque odit modi,
-            quasi eius mollitia repellendus tenetur ipsa quas. Porro accusamus
-            ea et deleniti tempora, mollitia vero placeat deserunt dolor enim
-            inventore dicta, nemo.
-          </p>
-        </section>
-        <section>
-          <h2>Lorem ipsum dolor sit amet.</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
-            maiores laborum, aperiam consequuntur nobis hic eaque odit modi,
-            quasi eius mollitia repellendus tenetur ipsa quas. Porro accusamus
-            ea et deleniti tempora, mollitia vero placeat deserunt dolor enim
-            inventore dicta, nemo.
-          </p>
-        </section>
-      </div>
-      <aside>
-        <div class="card">
-          <h3>Lorem ipsum dolor sit.</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-            doloribus velit illum, in, magni voluptatum?
-          </p>
+      </header>
+      <main class="main">
+        <div class="main__content">
+          <section>
+            <form action="#" class="start" method="post">
+              <fieldset>
+                <label for="start__date" class="start__label"
+                  >Начало рабочего дня</label
+                >
+                <div class="start__group">
+                  <input
+                    type="date"
+                    name="start_date"
+                    id="start_date"
+                    class="start__date"
+                  />
+                  <button
+                    type="button"
+                    class="start__today"
+                    name="today"
+                    id="today"
+                  >
+                    Сегодня
+                  </button>
+                </div>
+              </fieldset>
+              <button
+                type="submit"
+                name="start"
+                id="start"
+                class="start__submit"
+              >
+                Старт
+              </button>
+            </form>
+          </section>
+          <section class="progress">
+            <h2 class="progress__title">Смена сегодня</h2>
+            <p class="progress__item warning">
+              На сегодняшний день рабочей смены на найдено
+            </p>
+          </section>
         </div>
-        <div class="card">
-          <h3>Lorem ipsum dolor sit.</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-            doloribus velit illum, in, magni voluptatum?
-          </p>
+      </main>
+      <aside class="aside">
+        <div class="history">
+          <h2 class="history__title">10 предыдущих смен</h2>
+          <dl>
+            <dt><a href="#">Понедельник, 23.02.2026</a></dt>
+            <dd>Kesko</dd>
+            <dt><a href="#">Вторник, 24.02.2026</a></dt>
+            <dd>KPL</dd>
+            <dt><a href="#">Среда, 25.02.2026</a></dt>
+            <dd>Kesko</dd>
+            <dt><a href="#">Четверг, 26.02.2026</a></dt>
+            <dd>Kesko</dd>
+            <dt><a href="#">Пятница, 27.02.2026</a></dt>
+            <dd>KPL</dd>
+            <dt><a href="#">Понедельник, 02.03.2026</a></dt>
+            <dd>Kesko</dd>
+            <dt><a href="#">Вторник, 03.03.2026</a></dt>
+            <dd>KPL</dd>
+            <dt><a href="#">Среда, 04.03.2026</a></dt>
+            <dd>Kesko</dd>
+            <dt><a href="#">Четверг, 05.03.2026</a></dt>
+            <dd>KPL</dd>
+            <dt><a href="#">Пятница, 06.03.2026</a></dt>
+            <dd>KPL</dd>
+          </dl>
         </div>
       </aside>
-    </main>
-    <footer>
-      <div class="footer__content">
-        <em
-          >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat
-          molestiae consectetur minus facere dignissimos ea veritatis itaque
-          officiis? Consequuntur, sint!</em
-        >
-      </div>
-    </footer>
+      <footer class="footer">
+        <div class="footer__content">
+          <em
+            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat
+            molestiae consectetur minus facere dignissimos ea veritatis itaque
+            officiis? Consequuntur, sint!</em
+          >
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
