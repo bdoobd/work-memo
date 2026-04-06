@@ -141,27 +141,71 @@
       </footer>
     </div>
     <dialog id="data_dialog" class="data_dialog" autofocus="">
-      <h3>Детальная информация</h3>
+      <h3 class="data_dialog__title data_dialog__title--font">
+        Детальная информация
+      </h3>
       <p class="working-date"></p>
       <form method="dialog" class="data_dialog__form">
-        <div class="form__group">
-          <label for="start-time">Время начала</label>
-          <input type="time" id="start-time" name="start-time" required />
+        <div class="flex-group">
+          <div class="form__group">
+            <label for="start-time">Время начала</label>
+            <input
+              type="time"
+              id="start-time"
+              name="start-time"
+              required
+              class="data_dialog__time dialog__input--font"
+            />
+          </div>
+          <div class="form__group">
+            <label for="start-ml">Стартовый пробег</label>
+            <input
+              type="number"
+              id="start-ml"
+              name="start-ml"
+              required
+              class="data__dialog__number dialog__input--font"
+            />
+          </div>
         </div>
-        <div class="form__group">
-          <label for="start-ml">Стартовый пробег</label>
-          <input type="number" id="start-ml" name="start-ml" required />
+        <div class="flex-group">
+          <div class="form__group">
+            <label for="end-time">Время окончания</label>
+            <input
+              type="time"
+              id="end-time"
+              name="end-time"
+              required
+              class="data_dialog__time dialog__input--font"
+            />
+          </div>
+          <div class="form__group">
+            <label for="end-ml">Конечный пробег</label>
+            <input
+              type="number"
+              id="end-ml"
+              name="end-ml"
+              required
+              class="data__dialog__number dialog__input--font"
+            />
+          </div>
         </div>
-        <div class="form__group">
-          <label for="end-time">Время окончания</label>
-          <input type="time" id="end-time" name="end-time" required />
-        </div>
-        <div class="form__group">
-          <label for="end-ml">Конечный пробег</label>
-          <input type="number" id="end-ml" name="end-ml" required />
-        </div>
-        <button id="confirm" value="confirm">Подтвердить</button>
-        <button id="cancel" value="cancel">Отмена</button>
+        <button
+          type="submit"
+          id="confirm"
+          value="confirm"
+          class="data_dialog__confirm btn"
+        >
+          Подтвердить
+        </button>
+        <button
+          type="button"
+          id="cancel"
+          value="cancel"
+          class="data_dialog__cancel btn"
+        >
+          Отмена
+        </button>
       </form>
     </dialog>
   </body>

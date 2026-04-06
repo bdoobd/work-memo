@@ -166,23 +166,70 @@ dd:before {
 .data_dialog {
   border: none;
   border-radius: 4px;
-  padding: 2rem;
-  max-width: 20rem;
+  padding: 1rem;
+  width: clamp(20rem, 100vw, 30rem);
   margin: 0 auto;
   margin-block-start: clamp(1rem, 25vw, 5rem);
   background-color: var(--background);
+  box-shadow: 0.25rem 0.25rem 0.8rem 0.25rem gray;
 }
 
 .data_dialog::backdrop {
   backdrop-filter: blur(2px);
 }
 
+.data_dialog__title {
+  margin-block-end: 0.5rem;
+}
+
+.data_dialog__title--font {
+  font-size: 1.6rem;
+}
+
+.flex-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .form__group {
+  flex: 0 0 50%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-block-end: 1rem;
 }
+
+.data_dialog__time {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.data__dialog__number {
+  min-width: 0;
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.dialog__input--font {
+  font-size: 1.4rem;
+}
+
+.btn {
+  font-size: 1.4rem;
+  padding: 0.25rem 1rem;
+  margin-block-start: 1rem;
+  border-radius: 0.25rem;
+}
+
+.data_dialog__confirm {
+  background-color: var(--primary);
+}
+
+.data_dialog__cancel {
+  background-color: var(--warning);
+}
+
 /* Классы-утилиты */
 .warning {
   color: var(--warning);
