@@ -9,6 +9,11 @@ from database import engine
 app = FastAPI()
 
 
+@app.on_event("startup")
+def startup_event():
+    create_db_and_tables()
+
+
 @app.get("/")
 async def get_root() -> dict:
     """Удалить этот эндпойнт после тестов
@@ -30,5 +35,5 @@ def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 
-if __name__ == "__main__":
-    create_db_and_tables()
+# if __name__ == "__main__":
+#     create_db_and_tables()
