@@ -8,7 +8,7 @@ from database import engine
 
 app = FastAPI()
 
-
+# TODO: исправить на lifespan
 @app.on_event("startup")
 def startup_event():
     create_db_and_tables()
@@ -23,7 +23,10 @@ async def get_root() -> dict:
     """
     create_db_and_tables()
 
-    return {"message": "Root endpoint"}
+    import sys
+    intr = sys.executable
+
+    return {"message": "Root endpoint", "interpreter": intr}
 
 
 app.include_router(user_router)

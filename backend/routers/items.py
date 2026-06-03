@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix="/items", tags=["Записи действий"])
+router = APIRouter(prefix="/items", tags=["Точка работы с задачами"])
 
 
-@router.get("/all")
+@router.get("/")
 async def get_all_items():
     return {"action": "Fetching data of all items"}
 
