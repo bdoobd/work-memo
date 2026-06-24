@@ -1,4 +1,20 @@
 services:
+  backend:
+    build: ./backend
+    container_name: backend
+    volumes:
+      - ./backend:/backend
+        # - vscode-server:/root/.vscode-server
+    ports:
+      - 8080:8090
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    networks:
+      - worknet
   db:
     image: mysql:latest
     container_name: db
@@ -12,9 +28,16 @@ services:
       MYSQL_PASSWORD: let_me_in_please
     volumes:
       - db-volume:/var/lib/mysql/
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
     networks:
       - worknet
 volumes:
   db-volume:
+    #vscode-server:
 networks:
   worknet:
