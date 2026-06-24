@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import TYPE_CHECKING
 from sqlmodel import SQLModel, Field, func, Relationship
+from pydantic import ConfigDict
 
 if TYPE_CHECKING:
     from .role import Role
-
 
 class BaseUser(SQLModel):
     username: str = Field(index=True)
@@ -37,20 +37,17 @@ class CreateUser(BaseUser):
 class UpdateUser(SQLModel):
     role_id: int | None = None
     disabled: bool | None = None
-    password_hash: str | None = None
+    password: str | None = None
+    password_confirm: str | None = None
 
 
 class ShowUser(BaseUser):
-    id: int = Field(primary_key=True)
-    created: datetime = Field(
-        default_factory=datetime.now, sa_column_kwargs={"server_default": func.now()}
-    )
-    modified: datetime = Field(
-        default_factory=datetime.now,
-        sa_column_kwargs={"server_default": func.now(), "onupdate": func.now()},
-    )
-    disabled: bool = Field(default=False)
+    model_config: ConfigDict = ConfigDict(from_attributes=True)
 
+    id: int
+    created: datetime
+    modified: datetime
+    disabled: bool
 
 class FindUser(SQLModel):
     username: str | None = None

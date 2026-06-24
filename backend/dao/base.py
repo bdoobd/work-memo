@@ -1,8 +1,10 @@
 from typing import TypeVar, Generic, Type
-from sqlmodel import SQLModel, Session, select
+from sqlmodel import SQLModel, select
+from sqlmodel.ext.asyncio.session import AsyncSession
+
 from .filter import Filter
 from .expression_builder import builder
-from database import engine
+from session import AsyncSessionLocal
 
 T = TypeVar("T")
 
@@ -12,54 +14,68 @@ class BaseDAO(Generic[T]):
     model: Type[T]
 
     @classmethod
-    def find(cls, offset: int, limit: int, filters: list[Filter] | None = None):
+    async def find_one(cls, session: AsyncSession, id: int):
+        return await session.get(cls.model, id)
 
-        query = select(cls.model)
+    @classmethod
+    async def find(
+        cls,
+        session: AsyncSession,
+        offset: int,
+        limit: int,
+        filters: list[Filter] | None = None,
+    ):
+
+        stmt = select(cls.model)
 
         if filters:
             expressions = [builder(cls.model, filter_) for filter_ in filters]
 
-            query = query.where(*expressions)
+            stmt = stmt.where(*expressions)
 
-        with Session(engine) as session:
-            result = session.exec(query.offset(offset=offset).limit(limit=limit)).all()
+        result = await session.exec(stmt.offset(offset=offset).limit(limit=limit))
 
-        return result
-
-    @classmethod
-    def find_one(cls, id: int):
-        with Session(engine) as session:
-            result = session.get(cls.model, id)
-
-        return result
+        return result.all()
 
     @classmethod
-    def create(cls, data: SQLModel):
+    async def create(cls, data: SQLModel, session: AsyncSession):
         values = data.model_dump(exclude_unset=True)
         instance = cls.model(**values)
-        with Session(engine) as session:
-            session.add(instance=instance)
-            session.commit()
-            session.refresh(instance=instance)
+
+        session.add(instance=instance)
+        await session.commit()
+        await session.refresh(instance=instance)
 
         return instance
 
     @classmethod
-    def update(cls, id: int, data: SQLModel):
+    async def update(cls, id: int, data: SQLModel, session: AsyncSession):
 
-        with Session(engine) as session:
-            found = session.get(cls.model, id)
+       
+        found = await session.get(cls.model, id)
 
-            if not found:
-                return None
+        if found is None:
+            return None
 
-            updates = data.model_dump(exclude_unset=True)
+        updates = data.model_dump(exclude_unset=True)
 
-            for key, value in updates.items():
-                setattr(found, key, value)
+        for key, value in updates.items():
+            setattr(found, key, value)
 
             session.add(found)
-            session.commit()
-            session.refresh(found)
+            await session.commit()
+            await session.refresh(found)
 
-            return found
+        return found
+    
+    @classmethod
+    async def delete(cls, id: int, session: AsyncSession):
+        found = await session.get(cls.model, id)
+
+        if found is None:
+            return None
+
+        await session.delete(found)
+        await session.commit()
+
+        return found
