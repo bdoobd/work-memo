@@ -3,4 +3,5 @@ __pycache__
 *.drawio
 
 .venv/
+.vscode
 .env
