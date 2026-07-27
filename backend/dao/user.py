@@ -1,9 +1,16 @@
+from typing import TYPE_CHECKING
 from sqlmodel.ext.asyncio.session import AsyncSession
+from sqlalchemy.orm import selectinload, joinedload
+from sqlmodel import select
+from fastapi import HTTPException
 
 from .base import BaseDAO
-from models.user import CreateUser, User, WriteUser
-from auth.auth import get_password_hash
+from models.user import User
+
+from schemas.user import CreateUser, AddUser, UpdateUser
 from dao.filter import Filter
+
+from auth.security import get_password_hash
 
 
 class UserDAO(BaseDAO[User]):
@@ -11,25 +18,70 @@ class UserDAO(BaseDAO[User]):
     model = User
 
     @classmethod
-    async def create(cls, user: CreateUser, session: AsyncSession) -> WriteUser:
-        if not user.password == user.password_confirm:
-            raise Exception("Passwords do not match")
+    async def find(cls, session: AsyncSession, offset: int, limit: int):
 
-        values = user.model_dump(exclude_unset=True)
-        values["password_hash"] = get_password_hash(user.password)
+        stmt = select(cls.model).options(selectinload(cls.model.role)).offset(offset=offset).limit(limit=limit)  # type: ignore[arg-type]
 
-        return await super().create(data=WriteUser(**values), session=session)
+        result = await session.exec(stmt)
+        users = result.all()
 
-        # return result
+        if not users:
+            raise HTTPException(status_code=404, detail="Users not found")
+
+        return users
+
+    @classmethod
+    async def find_one(cls, session: AsyncSession, id: int):
+        stmt = select(cls.model).options(selectinload(User.role)).where(cls.model.id == id)  # type: ignore[arg-type]
+
+        result = await session.exec(stmt)
+
+        user = result.first()
+
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        return user
+
+    # @classmethod
+    # async def create(cls, user: CreateUser, session: AsyncSession):
+
+    #     user_dict = user.model_dump()
+    #     user_dict["password_hash"] = get_password_hash(password=user.password)
+
+    #     new_user = AddUser(**user_dict)
+
+    #     return await super().create(data=new_user, session=session)
+
+    @classmethod
+    async def update(cls, id: int, data: UpdateUser, session: AsyncSession):
+        user_dict = data.model_dump()
+        if data.password is not None:
+            user_dict["password_hash"] = get_password_hash(password=data.password)
+
+        return user_dict
 
     @classmethod
     async def search(
         cls, session: AsyncSession, user_filter: dict, offset: int = 0, limit: int = 20
     ):
 
-        return await super().find(
+        found = await super().find(
             session=session,
             offset=offset,
             limit=limit,
             filters=[Filter(**user_filter)],
         )
+        if not found:
+            raise HTTPException(status_code=404, detail="Users not found")
+
+        return found
+
+    @classmethod
+    async def get_user_by_username(cls, session: AsyncSession, username: str):
+        stmt = select(cls.model).options(joinedload(cls.model.role)).where(cls.model.username == username)  # type: ignore[arg-type]
+
+        result = await session.exec(stmt)
+        user = result.one_or_none()
+
+        return user
