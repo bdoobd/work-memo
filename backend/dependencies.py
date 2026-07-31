@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import Depends
+from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlmodel.ext.asyncio.session import AsyncSession
 import jwt
@@ -34,7 +34,9 @@ async def get_current_user(
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
+
         username = payload.get("username")
+
         if username is None:
             raise IncorrectCredentials
 
@@ -43,6 +45,9 @@ async def get_current_user(
         raise IncorrectCredentials
 
     user = await UserDAO.find_one(session=session, id=userdata.id)
+
+    print(user)
+
     if user is None:
         raise IncorrectCredentials
 
@@ -52,15 +57,32 @@ async def get_current_user(
 async def get_current_active_user(
     current_user: Annotated[ShowUser, Depends(get_current_user)],
 ):
+
     if current_user.disabled:
-        raise Exception("Inactive user")
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN, detail="Inactive user"
+        )
 
     return current_user
 
 
-async def is_admin(current_user: Annotated[ShowUser, Depends(get_current_active_user)]):
-    pass
+async def is_admin(current_user: Annotated[ShowUser, Depends(get_current_user)]):
+    if current_user.role.role != "admin" or current_user.disabled:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have right privileges",
+        )
+
+    return current_user
 
 
-async def is_power(current_user: Annotated[ShowUser, Depends(get_current_active_user)]):
-    pass
+async def is_power(current_user: Annotated[ShowUser, Depends(get_current_user)]):
+    if (
+        current_user.role.role != "admin" and current_user.role.role != "power"
+    ) or current_user.disabled:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="You do not have right privileges",
+        )
+
+    return current_user

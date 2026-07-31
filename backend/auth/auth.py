@@ -1,23 +1,7 @@
-# from datetime import datetime, timezone, timedelta
-
-# from pwdlib import PasswordHash
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-# import jwt
-
-# from config import settings
 from auth.security import verify_password
 from dao.user import UserDAO
-
-# pwh = PasswordHash.recommended()
-
-
-# def get_password_hash(password: str) -> str:
-#     return pwh.hash(password)
-
-
-# def verify_password(plain_password: str, password_hash: str) -> bool:
-#     return pwh.verify(plain_password, password_hash)
 
 
 async def authenticate_user(username: str, password: str, session: AsyncSession):
@@ -36,18 +20,3 @@ async def authenticate_user(username: str, password: str, session: AsyncSession)
         return False
 
     return user
-
-
-# def create_token(data: dict, expires_delta: timedelta | None = None):
-#     tmp_data = data.copy()
-
-#     if expires_delta:
-#         expire = datetime.now(timezone.utc) + expires_delta
-#     else:
-#         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
-
-#     tmp_data.update({"exp": expire})
-
-#     token = jwt.encode(tmp_data, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
-
-#     return token

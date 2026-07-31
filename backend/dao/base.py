@@ -1,15 +1,11 @@
-from typing import TypeVar, Generic, Type, Annotated
+from typing import TypeVar, Generic, Type
 
-from fastapi import Depends
-from sqlmodel import SQLModel, select
+from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from pydantic import BaseModel
 
 from .filter import Filter
 from .expression_builder import builder
-
-# from dao.session_builder import connection
-# from session import AsyncSessionLocal
 
 T = TypeVar("T")
 
@@ -84,6 +80,8 @@ class BaseDAO(Generic[T]):
     @classmethod
     async def delete(cls, id: int, session: AsyncSession):
         found = await session.get(cls.model, id)
+
+        print("Found: ", found, "ID: ", id)
 
         if found is None:
             return None

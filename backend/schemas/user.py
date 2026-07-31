@@ -38,5 +38,20 @@ class UpdateUser(BaseModel):
 
     role_id: int | None = None
     disabled: bool | None = None
+
+
+class UpdateUserPassowrds(UpdateUser):
     password: str | None = None
     password_confirm: str | None = None
+
+
+class UpdateUserHash(UpdateUser):
+    password_hash: str | None = None
+
+
+class TokenUser(BaseModel):
+
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    username: str

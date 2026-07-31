@@ -1,19 +1,17 @@
 from typing import Annotated
-from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from dependencies import get_session, get_current_active_user
+from dao.session_builder import get_session
+from dependencies import get_current_active_user, is_admin
 from services.user import UserService
 from dao.user import UserDAO
 from dao.filter import Filter
-from schemas.user import ShowUser, User, CreateUser, UpdateUser
+from schemas.user import ShowUser, User, CreateUser, UpdateUserPassowrds
 from schemas.token import Token
-from config import settings
 from auth.auth import authenticate_user
-from auth.jwt import create_token
 from exceptions import IncorrectCredentials
 
 router = APIRouter(prefix="/users", tags=["Точка работы с пользователями"])
@@ -75,38 +73,32 @@ async def login(
     if not user:
         raise IncorrectCredentials()
 
-    data = {"username": user.username, "id": user.id, "role": user.role.role}
-    expires_in = timedelta(settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    token = create_token(data=data, expires_delta=expires_in)
-
-    return Token(access_token=token, token_type="bearer")
+    return UserService.create_token(user.model_dump())
 
 
-# TODO: При изменении пароля требуется сверить оба указанных пароля и в случае их схожести хешировать пароль. Запись изменений через базовый метод не умеет сравнивать пароли и хешировать их. Надо создать метод в UserDAO для этого
 @router.patch("/{id}", summary="Обновление данных пользователя")
 async def update_user(
-    id: int, user_data: UpdateUser, session: AsyncSession = Depends(get_session)
+    id: int,
+    user_data: UpdateUserPassowrds,
+    session: AsyncSession = Depends(get_session),
 ):
-    print(user_data)
-    print(type(user_data))
-    if user_data.password is not None:
-        if user_data.password != user_data.password_confirm:
-            # TODO: Сделать исключение для этого типа ошибки
-            raise Exception("Passwords do not match")
 
-    user = await UserDAO.update(id=id, data=user_data, session=session)
-
-    if not user:
-        raise HTTPException(404, "User not exists")
+    user = await UserService.update(id=id, data=user_data, session=session)
 
     return user
 
 
 @router.delete("/{id}", summary="Удаление пользователя", response_model=User)
-async def delete_user(id: int, session: AsyncSession = Depends(get_session)):
+async def delete_user(
+    admin: Annotated[ShowUser, Depends(is_admin)],
+    id: int,
+    session: AsyncSession = Depends(get_session),
+):
     user = await UserDAO.delete(id=id, session=session)
 
     if user is None:
-        raise HTTPException(404, "User not exists")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
+        )
 
     return user

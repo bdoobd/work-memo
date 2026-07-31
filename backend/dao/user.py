@@ -1,4 +1,3 @@
-from typing import TYPE_CHECKING
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.orm import selectinload, joinedload
 from sqlmodel import select
@@ -7,10 +6,7 @@ from fastapi import HTTPException
 from .base import BaseDAO
 from models.user import User
 
-from schemas.user import CreateUser, AddUser, UpdateUser
 from dao.filter import Filter
-
-from auth.security import get_password_hash
 
 
 class UserDAO(BaseDAO[User]):
@@ -42,24 +38,6 @@ class UserDAO(BaseDAO[User]):
             raise HTTPException(status_code=404, detail="User not found")
 
         return user
-
-    # @classmethod
-    # async def create(cls, user: CreateUser, session: AsyncSession):
-
-    #     user_dict = user.model_dump()
-    #     user_dict["password_hash"] = get_password_hash(password=user.password)
-
-    #     new_user = AddUser(**user_dict)
-
-    #     return await super().create(data=new_user, session=session)
-
-    @classmethod
-    async def update(cls, id: int, data: UpdateUser, session: AsyncSession):
-        user_dict = data.model_dump()
-        if data.password is not None:
-            user_dict["password_hash"] = get_password_hash(password=data.password)
-
-        return user_dict
 
     @classmethod
     async def search(
