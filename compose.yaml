@@ -6,13 +6,23 @@ services:
       - ./backend:/backend
         # - vscode-server:/root/.vscode-server
     ports:
-      - 8080:8090
+      - 8000:8080
     restart: unless-stopped
     depends_on:
       db:
         condition: service_healthy
-    links:
-      - db
+    networks:
+      - worknet
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    volumes:
+      - ./frontend:/app
+        # - vscode-server:/root/.vscode-server
+    ports:
+      - 3000:3000
+    restart: unless-stopped
     networks:
       - worknet
   db:
