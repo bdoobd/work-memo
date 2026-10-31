@@ -27,13 +27,13 @@
     <script src="./assets/js/date.js" defer></script>
     <script src="./assets/js/data.js" defer></script>
     <script src="./assets/js/menu.js" type="module"></script>
-    <title>CSS Grid</title>
+    <title>Work cases</title>
   </head>
   <body>
     <div class="wrapper">
       <header class="header">
         <div class="header__content">
-          <h1 class="header__logo">Lorem ipsum dolor.</h1>
+          <h1 class="header__logo">Hello {username}</h1>
           <nav class="nav">
             <ul class="nav__list">
               <li class="nav__item">
@@ -62,53 +62,336 @@
       </header>
       <main class="main">
         <div class="main__content">
-          <section>
-            <form action="#" class="start" method="post">
-              <fieldset>
-                <label for="start__date" class="start__label"
-                  >Начало рабочего дня</label
-                >
-                <div class="start__group">
-                  <input
-                    type="date"
-                    name="start_date"
-                    id="start_date"
-                    class="start__date"
-                  />
-                  <button
-                    type="button"
-                    class="start__today"
-                    name="today"
-                    id="today"
-                  >
-                    Сегодня
-                  </button>
-                </div>
-              </fieldset>
-              <button
-                type="button"
-                name="start"
-                id="start"
-                class="start__submit"
-                disabled
-              >
-                Старт
-              </button>
-            </form>
-          </section>
           <section class="progress">
-            <h2 class="progress__title">Смена сегодня</h2>
-            <p class="progress__item warning">
-              На сегодняшний день рабочей смены на найдено
-            </p>
+            <!-- <h2 class="progress__title">Open cases</h2> -->
+            <!-- <p class="progress__item warning">no open cases found</p> -->
+            <table class="table table__cases" id="open_cases">
+              <caption>
+                Open cases
+              </caption>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Operator</th>
+                  <th>Handler</th>
+                  <th>Client</th>
+                  <th>Network</th>
+                  <th>Shipper</th>
+                  <th>Type</th>
+                  <th>MAWB</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+                <tr>
+                  <td>ATC1236576</td>
+                  <td>Started</td>
+                  <td>10.08.2026</td>
+                  <td>Person</td>
+                  <td>Person 2</td>
+                  <td>Client name</td>
+                  <td>WCA</td>
+                  <td>Shipper name</td>
+                  <td>Export</td>
+                  <td>123-3456789</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tfoot>
+            </table>
           </section>
         </div>
       </main>
       <aside class="aside">
         <div class="history">
-          <h2 class="history__title">5 предыдущих смен</h2>
-          <dl>
-            <dt><a href="#">Понедельник, 23.02.2026</a></dt>
+          <h2 class="history__title">Open cases cards</h2>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <div class="case__card">
+            <div class="case__card__header">
+              <p>ATC1239875 / STARTED</p>
+              <p>05.08.2026</p>
+            </div>
+            <div class="case__card__subheader">
+              <p>Operator name</p>
+              <p>Handler name</p>
+            </div>
+            <div class="case__card__body">
+              <p>Client: Some client's name / Network ID</p>
+              <p>Shipper: Some shippers's name</p>
+              <div class="case__card__columns">
+                <p>Network</p>
+                <p>Type</p>
+                <p>Destination</p>
+              </div>
+            </div>
+          </div>
+          <!-- <dl>
+            <dt><a href="#">ATC1234567</a></dt>
             <dd>Kesko</dd>
             <dt><a href="#">Вторник, 24.02.2026</a></dt>
             <dd>KPL</dd>
@@ -128,7 +411,7 @@
             <dd>KPL</dd>
             <dt><a href="#">Пятница, 06.03.2026</a></dt>
             <dd>KPL</dd>
-          </dl>
+          </dl> -->
         </div>
       </aside>
       <footer class="footer">
@@ -163,6 +446,7 @@
             <input
               type="number"
               id="start-ml"
+              100.117.103.66
               name="start-ml"
               required
               class="data__dialog__number dialog__input--font"

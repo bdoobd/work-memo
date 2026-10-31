@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
   --background: rgba(243, 227, 208, 1);
@@ -17,7 +18,8 @@
 }
 
 body {
-  font-family: "Oswald", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -28,7 +30,7 @@ body {
       min-content,
       max-content
     );
-  max-width: 72rem;
+  max-width: 100%;
   margin: 0 auto;
   min-height: 100vh;
 }
@@ -82,7 +84,7 @@ dd:before {
 
 .header__logo {
   font-size: 1.5rem;
-  letter-spacing: -2px;
+  letter-spacing: 0.5px;
 }
 
 .nav {
@@ -112,7 +114,7 @@ dd:before {
 /*********************************************************/
 /* START form styles (mobile first) */
 /*********************************************************/
-.start {
+.form__select {
   max-width: 29rem;
   margin: 0 auto;
 
@@ -122,18 +124,18 @@ dd:before {
     border-radius: 4px;
   }
 
-  .start__label {
+  .select__label {
     display: block;
     font-size: 2rem;
     margin-block-end: 2rem;
   }
 
-  .start__group {
+  .control__group {
     display: flex;
     gap: 0.25rem;
   }
 
-  .start__date {
+  .select__case {
     width: 100%;
     font-size: 1.2rem;
     padding: 0.5rem;
@@ -159,6 +161,79 @@ dd:before {
     padding: 0.5rem 2rem;
     border-radius: 4px;
   }
+}
+/*********************************************************/
+/* Table test design */
+/*********************************************************/
+table {
+  width: 100%;
+}
+
+.table__cases {
+  border-collapse: collapse;
+
+  caption {
+    font-size: 1.2rem;
+    text-align: right;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+  }
+
+  thead {
+    background-color: var(--primary);
+    color: var(--text);
+
+    th {
+      padding-block: 0.5rem;
+    }
+  }
+
+  tbody {
+    td {
+      padding-block: 0.5rem;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--secondary);
+    }
+  }
+}
+/*********************************************************/
+/* Open case card */
+/*********************************************************/
+.case__card {
+  border: thin solid var(--primary);
+  border-radius: 0.5rem;
+  background-color: var(--secondary);
+  padding: 0.5rem;
+  margin-block-end: 0.5rem;
+  transition: all ease-in-out 0.4s;
+}
+
+.case__card:hover {
+  background-color: var(--background);
+}
+
+.case__card__header {
+  font-size: 1.3rem;
+}
+
+.case__card__subheader {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding-block: 0.5rem;
+}
+
+.case__card__header,
+.case__card__subheader {
+  display: flex;
+  justify-content: space-between;
+  /* border-bottom: thin solid var(--primary); */
+}
+
+.case__card__columns {
+  display: flex;
+  justify-content: space-between;
 }
 /*********************************************************/
 /* START dialog styles (mobile first) */

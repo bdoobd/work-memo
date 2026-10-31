@@ -15,10 +15,10 @@ const weekdays = [
   "Суббота",
 ];
 
-logo.textContent = `${weekdays[today.getDay()]} ${today.getDate()}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear()}`;
+// logo.textContent = `${weekdays[today.getDay()]} ${today.getDate()}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear()}`;
 
-today_btn.addEventListener("click", () => {
-  date_field.value = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
+// today_btn.addEventListener("click", () => {
+//   date_field.value = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
-  startButton.disabled = false;
-});
+//   startButton.disabled = false;
+// });

@@ -7,26 +7,26 @@ const startDateInput = document.getElementById("start_date");
 const cancelButton = document.getElementById("cancel");
 const confirmButton = document.getElementById("confirm");
 
-startDateInput.addEventListener("change", () => {
-  if (startDateInput.value) {
-    openButton.disabled = false;
-  } else {
-    openButton.disabled = true;
-  }
-});
+// startDateInput.addEventListener("change", () => {
+//   if (startDateInput.value) {
+//     openButton.disabled = false;
+//   } else {
+//     openButton.disabled = true;
+//   }
+// });
 
-openButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  dialog.showModal();
+// openButton.addEventListener("click", (e) => {
+//   e.preventDefault();
+//   dialog.showModal();
 
-  const dateElement = document.querySelector(".working-date");
-  // TODO: Отправить запрос на API для добавления рабочего дня в баунд и получения его ID
-  const selectedDate = startDateInput.value;
+//   const dateElement = document.querySelector(".working-date");
+//   // TODO: Отправить запрос на API для добавления рабочего дня в баунд и получения его ID
+//   const selectedDate = startDateInput.value;
 
-  console.log(typeof selectedDate, selectedDate);
+//   console.log(typeof selectedDate, selectedDate);
 
-  dateElement.textContent = `${selectedDate.split("-").reverse().join(".")}`;
-});
+//   dateElement.textContent = `${selectedDate.split("-").reverse().join(".")}`;
+// });
 
 cancelButton.addEventListener("click", (e) => {
   e.preventDefault();
